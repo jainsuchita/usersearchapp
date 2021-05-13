@@ -1,7 +1,6 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
-import Paper from "@material-ui/core/Paper";
 import UserItem from "./UserItem";
 
 const useStyles = makeStyles((theme) => ({
@@ -16,7 +15,7 @@ const UsersList = ({ users, isLoading }) => {
 
   if (isLoading) {
     return <p>Loading ...</p>;
-  } else {
+  } else if (users && users.length > 0) {
     return (
       <div className={classes.root}>
         <Grid container xs={12}>
@@ -27,6 +26,8 @@ const UsersList = ({ users, isLoading }) => {
         </Grid>
       </div>
     );
+  } else {
+    return <div>No Users found</div>;
   }
 };
 

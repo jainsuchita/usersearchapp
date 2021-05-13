@@ -2,10 +2,8 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
-import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
-import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
@@ -15,8 +13,8 @@ const useStyles = makeStyles((theme) => ({
     maxWidth: 345,
     flexGrow: 1,
   },
-  media: {
-    height: 140,
+  cardContent: {
+    height: 200,
   },
   paper: {
     padding: theme.spacing(2),
@@ -32,13 +30,8 @@ export default function UserItem({ name, email, country, photo, gender, age }) {
       <Paper className={classes.paper}>
         <Card className={classes.root}>
           <CardActionArea>
-            <CardMedia
-              component="img"
-              className={classes.media}
-              image={photo}
-              title="User Photo"
-            />
-            <CardContent>
+            <CardMedia component="img" image={photo} title="User Photo" />
+            <CardContent className={classes.cardContent}>
               <Typography gutterBottom variant="h5" component="h2">
                 {name}
               </Typography>
@@ -60,14 +53,6 @@ export default function UserItem({ name, email, country, photo, gender, age }) {
               </Typography>
             </CardContent>
           </CardActionArea>
-          {/* <CardActions>
-        <Button size="small" color="primary">
-          Share
-        </Button>
-        <Button size="small" color="primary">
-          Learn More
-        </Button>
-      </CardActions> */}
         </Card>
       </Paper>
     </Grid>

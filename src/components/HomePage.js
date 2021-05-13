@@ -9,11 +9,12 @@ import UsersList from "./UsersList";
 // import Filters from "./Filters";
 import axios from "axios";
 
-const HomePage = (props) => {
+const HomePage = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const [users, setUsers] = useState(props.users);
+  const [users, setUsers] = useState([]);
+  const [filteredUsers, setFilteredUsers] = useState([]);
   //   const [sortOrder, setSortOrder] = useState("");
-  //   const inputRef = useRef();
+  const inputRef = useRef();
 
   useEffect(() => {
     setIsLoading(true);
@@ -24,6 +25,7 @@ const HomePage = (props) => {
         setIsLoading(false);
         if (users.data.length > 0) {
           setUsers(users.data);
+          setFilteredUsers(users.data);
         }
       } catch (error) {
         console.log("error:", error);
@@ -31,15 +33,34 @@ const HomePage = (props) => {
     };
 
     loadUsers();
+    // initialize debounce function to search once user has stopped typing every half second
+    inputRef.current = _.debounce(onSearchText, 500);
   }, []);
+
+  const onSearchText = (text, users) => {
+    let filtered;
+    if (text) {
+      filtered = users.filter((user) =>
+        user.country.toLowerCase().includes(text.toLowerCase())
+      );
+    } else {
+      filtered = users;
+    }
+
+    setFilteredUsers(filtered);
+  };
+
+  const handleSearch = (event) => {
+    inputRef.current(event.target.value, users);
+  };
 
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <React.Fragment>
-        <Header />
+        <Header handleSearch={handleSearch} />
         {/* <Filters handleSort={handleSort} sortOrder={sortOrder} /> */}
-        <UsersList users={users} isLoading={isLoading} />
+        <UsersList users={filteredUsers} isLoading={isLoading} />
       </React.Fragment>
     </ThemeProvider>
   );

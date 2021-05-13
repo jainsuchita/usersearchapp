@@ -2,7 +2,6 @@ import React from "react";
 import ReactDOM from "react-dom";
 import HomePage from "./components/HomePage";
 // import reportWebVitals from "./reportWebVitals";
-import "./css/styles.scss";
 
 ReactDOM.render(
   <React.StrictMode>

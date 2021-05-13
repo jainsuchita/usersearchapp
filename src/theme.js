@@ -4,18 +4,15 @@ const theme = createMuiTheme({
   palette: {
     type: "light",
     primary: {
-      main: "#4b4d48",
+      main: "#4e7cc4",
     },
     secondary: {
       main: "#ffa500",
     },
-    background: {
-      default: "#414040",
-    },
+    // background: {
+    //   default: "#414040",
+    // },
   },
-  //   typography: {
-  //     fontFamily: "Open Sans",
-  //   },
 });
 
 export default theme;

@@ -24,8 +24,6 @@ const HomePage = (props) => {
         setIsLoading(false);
         if (users.data.length > 0) {
           setUsers(users.data);
-          console.log(users.data);
-          console.log("data", users);
         }
       } catch (error) {
         console.log("error:", error);

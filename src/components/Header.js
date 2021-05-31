@@ -5,6 +5,7 @@ import Typography from "@material-ui/core/Typography";
 import InputBase from "@material-ui/core/InputBase";
 import { fade, makeStyles } from "@material-ui/core/styles";
 import SearchIcon from "@material-ui/icons/Search";
+import Filters from "./Filters";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -64,7 +65,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Header({ handleSearch }) {
+export default function Header({ handleSearch, handleSort, sortOrder }) {
   const classes = useStyles();
 
   return (
@@ -74,6 +75,8 @@ export default function Header({ handleSearch }) {
           <Typography className={classes.title} variant="h6" noWrap>
             User Search App
           </Typography>
+
+          <Filters sortOrder={sortOrder} handleSort={handleSort} />
 
           <div className={classes.search}>
             <div className={classes.searchIcon}>

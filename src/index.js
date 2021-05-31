@@ -1,11 +1,16 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import HomePage from "./components/HomePage";
+// import HomePage from "./components/HomePage";
+// import App from "./App";
+// import AppContext from "./context/App2";
+// import App from "./useReducer/App";
+// import ShoppingList from "./useReducer/ShoppingList";
+import App from "./compundComponents/App";
 // import reportWebVitals from "./reportWebVitals";
 
 ReactDOM.render(
   <React.StrictMode>
-    <HomePage />
+    <App />
   </React.StrictMode>,
   document.getElementById("root")
 );

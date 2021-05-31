@@ -2,18 +2,17 @@
 import React, { useState, useEffect, useRef } from "react";
 import { ThemeProvider } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
+import axios from "axios";
 import _ from "lodash";
 import theme from "../theme";
 import Header from "./Header";
 import UsersList from "./UsersList";
-// import Filters from "./Filters";
-import axios from "axios";
 
 const HomePage = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [users, setUsers] = useState([]);
   const [filteredUsers, setFilteredUsers] = useState([]);
-  //   const [sortOrder, setSortOrder] = useState("");
+  const [sortOrder, setSortOrder] = useState("asc");
   const inputRef = useRef();
 
   useEffect(() => {
@@ -54,12 +53,32 @@ const HomePage = () => {
     inputRef.current(event.target.value, users);
   };
 
+  const handleSort = (event) => {
+    const value = event.target.value;
+    setSortOrder(value);
+    let sortedUsers = filteredUsers;
+    if (value === "asc") {
+      sortedUsers = [...filteredUsers].sort((a, b) => {
+        return a["age"] - b["age"];
+      });
+    } else if (value === "desc") {
+      sortedUsers = [...filteredUsers].sort((a, b) => {
+        return b["age"] - a["age"];
+      });
+    }
+
+    setFilteredUsers(sortedUsers);
+  };
+
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <React.Fragment>
-        <Header handleSearch={handleSearch} />
-        {/* <Filters handleSort={handleSort} sortOrder={sortOrder} /> */}
+        <Header
+          handleSearch={handleSearch}
+          handleSort={handleSort}
+          sortOrder={sortOrder}
+        />
         <UsersList users={filteredUsers} isLoading={isLoading} />
       </React.Fragment>
     </ThemeProvider>
